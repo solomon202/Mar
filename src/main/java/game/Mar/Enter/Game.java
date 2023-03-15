@@ -1,5 +1,5 @@
 package game.Mar.Enter;
-
+///eeeessss
 public class Game implements Runnable {
 	//сылочные 
 	private GameWindow gameWindow;
