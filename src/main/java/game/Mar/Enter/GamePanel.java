@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 import game.Mar.inputs.Keyboardsinput;
 import game.Mar.inputs.MouseInputs;
-
+//игровая панель где происходит вывод картинок 
 public class GamePanel extends JPanel{
 	//есть уже заданые параметры или получить через конструктор изменяемые данные .
 	private MouseInputs mouseInputs;
@@ -19,12 +19,12 @@ public class GamePanel extends JPanel{
 	private BufferedImage img,subImg;
 	
 
-	
+	//связываеп панель с клавай и мышкой 
    public GamePanel() { 
 	   
-	   
+	   //здесь мы создаем экземпляр класса со своими данными точька где мышка 
 	   mouseInputs = new MouseInputs(this);  
-	   
+	   //здесь мы берем методы 
 	   importImg();
 	   setPanelSize();
 	   // для обработки событий клавиатуры необходимо реализовать специальный интерфейс, а затем добавить получившегося слушателя к интересуемому компоненту. 
@@ -62,12 +62,12 @@ private void setPanelSize() {
 	   this.xDelta += value;
 	  
    }
-   
+   //связь кнопки и картинки 
    public void changeYDelta(int value) {
 	   this.yDelta += value;
 	   
    }
-   
+   //связывае мышку и картинку 
    public void setRectPos(int x,int y) {
 	   this.xDelta = x;
 	   this.yDelta = y;
