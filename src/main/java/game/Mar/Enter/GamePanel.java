@@ -16,8 +16,9 @@ public class GamePanel extends JPanel{
 	//есть уже заданые параметры или получить через конструктор изменяемые данные .
 	private MouseInputs mouseInputs;
 	private  float xDelta =100,yDelta = 100;
-	private BufferedImage img,subImg;
-	
+	private BufferedImage img;
+	private BufferedImage[][] animations;
+	private int aniTick,aniIndex,aniSpeed = 15;
 
 	//связываеп панель с клавай и мышкой 
    public GamePanel() { 
@@ -26,6 +27,9 @@ public class GamePanel extends JPanel{
 	   mouseInputs = new MouseInputs(this);  
 	   //здесь мы берем методы 
 	   importImg();
+	   
+	   
+	   loadAnimations();
 	   setPanelSize();
 	   // для обработки событий клавиатуры необходимо реализовать специальный интерфейс, а затем добавить получившегося слушателя к интересуемому компоненту. 
 	   addKeyListener(new Keyboardsinput(this));
@@ -34,8 +38,18 @@ public class GamePanel extends JPanel{
 	   addMouseMotionListener(mouseInputs);
 	   
    }
-   
-   private void importImg() {
+   //создать буфе из 5 картинок 
+   private void loadAnimations() {
+	animations = new BufferedImage [9][6];
+	
+	for(int j = 0; j < animations.length; j++)
+	//прогнать по 5 и  втавить вырезаную картинку в массив 
+	for (int i = 0 ; i < animations[j].length; i++)
+		animations[j][i] = img.getSubimage(i * 64,j * 40, 64, 40);
+	
+}
+
+private void importImg() {
    InputStream is = getClass().getResourceAsStream("/player_sprites.png");
 	
    try {
@@ -74,13 +88,30 @@ private void setPanelSize() {
 	   
    }
    
+   private void updateAnimationTick() {
+		//  когда нужно изменить последовательный ход
+	   //если это условие выполняется, то срабатывает код
+	  aniTick++;
+	   if(aniTick >= aniSpeed) {
+		   aniTick = 0;
+		   aniIndex ++;
+		   if(aniIndex >= 6)
+			   aniIndex = 0;  
+		   
+	   } 	
+   }
+   
    public void paintComponent(Graphics g) {
-	   super.paintComponent(g);
+	   super.paintComponent(g);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+	   
+	   updateAnimationTick();
+	                                                                                          
 	   //получить изображение и вырезать по координатам и размер
-	   subImg = img.getSubimage(1*64, 8*40, 64, 40);
-	   g.drawImage(subImg,(int)xDelta,(int)yDelta, 128, 80, null);
+	  g.drawImage(animations[1][aniIndex],(int)xDelta,(int)yDelta, 128, 80, null);
 	
+	  
 	   }
+
 	  
      
 }
