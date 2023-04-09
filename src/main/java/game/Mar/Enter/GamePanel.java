@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import game.Mar.inputs.Keyboardsinput;
 import game.Mar.inputs.MouseInputs;
+import static utilz.Constants.PlayerConstants.*;
 //игровая панель где происходит вывод картинок 
 public class GamePanel extends JPanel{
 	//есть уже заданые параметры или получить через конструктор изменяемые данные .
@@ -19,6 +20,7 @@ public class GamePanel extends JPanel{
 	private BufferedImage img;
 	private BufferedImage[][] animations;
 	private int aniTick,aniIndex,aniSpeed = 15;
+	private int playerAction = IDLE;
 
 	//связываеп панель с клавай и мышкой 
    public GamePanel() { 
@@ -60,7 +62,7 @@ private void importImg() {
 }
 
 private void setPanelSize() {
-	   Dimension size = new Dimension(1200,800);
+	   Dimension size = new Dimension(1200,600);
 	   setMinimumSize(size);
 	   setPreferredSize(size);
 	   setMaximumSize(size);
@@ -95,7 +97,7 @@ private void setPanelSize() {
 	   if(aniTick >= aniSpeed) {
 		   aniTick = 0;
 		   aniIndex ++;
-		   if(aniIndex >= 6)
+		   if(aniIndex >= GetSpriteAmount(playerAction))
 			   aniIndex = 0;  
 		   
 	   } 	
@@ -107,7 +109,7 @@ private void setPanelSize() {
 	   updateAnimationTick();
 	                                                                                          
 	   //получить изображение и вырезать по координатам и размер
-	  g.drawImage(animations[1][aniIndex],(int)xDelta,(int)yDelta, 128, 80, null);
+	  g.drawImage(animations[playerAction][aniIndex],(int)xDelta,(int)yDelta, 256, 160, null);
 	
 	  
 	   }
