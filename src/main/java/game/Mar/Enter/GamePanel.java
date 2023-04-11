@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import game.Mar.inputs.Keyboardsinput;
 import game.Mar.inputs.MouseInputs;
 import static utilz.Constants.PlayerConstants.*;
+import static utilz.Constants.Directions.*;
 //игровая панель где происходит вывод картинок 
 public class GamePanel extends JPanel{
 	//есть уже заданые параметры или получить через конструктор изменяемые данные .
@@ -21,6 +22,8 @@ public class GamePanel extends JPanel{
 	private BufferedImage[][] animations;
 	private int aniTick,aniIndex,aniSpeed = 15;
 	private int playerAction = IDLE;
+	private int playerDir = -1;
+	private boolean moving = false;
 
 	//связываеп панель с клавай и мышкой 
    public GamePanel() { 
@@ -69,27 +72,16 @@ private void setPanelSize() {
 	   
    }
    
-   
-   
-   //метод с получаемым параметром 
-   public void changeXDelta(int value) {
-	   //есть какаята картинка изночально позицыя квадрата 100 потом при нажатии присваиваиваится новая позиция дельта 0 и перересовыется уже не 0
-	   //тоесть  это позиция и + новая дэльта.
-	   this.xDelta += value;
-	  
-   }
-   //связь кнопки и картинки 
-   public void changeYDelta(int value) {
-	   this.yDelta += value;
-	   
-   }
-   //связывае мышку и картинку 
-   public void setRectPos(int x,int y) {
-	   this.xDelta = x;
-	   this.yDelta = y;
-	   
-   }
-   
+ public void setDirection(int direction) {
+	 this.playerDir = direction;
+	 moving = true;
+	 
+ }
+ 
+ public void setMoving(boolean moving) {
+	 this.moving = moving;
+ }
+ 
    private void updateAnimationTick() {
 		//  когда нужно изменить последовательный ход
 	   //если это условие выполняется, то срабатывает код
@@ -102,18 +94,43 @@ private void setPanelSize() {
 		   
 	   } 	
    }
+   private void setAnimation() {
+	   if(moving)
+		   playerAction = RUNNING;
+	   else
+		   playerAction = IDLE;
+   }
+   
+   private void updatePos() {
+	    if(moving) {
+	    	switch(playerDir) {
+	    	case LIFT:
+	    	xDelta -=5;
+	    	break;
+	    	case UP:
+	    		yDelta -=5;
+	    		break;
+	    	case RIGHT:
+	    		xDelta +=5;
+	    		break;
+	    	case DOWN:
+	    		yDelta +=5;
+	    		break;
+	    	}
+	    }
+   }
    
    public void paintComponent(Graphics g) {
 	   super.paintComponent(g);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 	   
 	   updateAnimationTick();
+	   setAnimation();
+	   updatePos();
 	                                                                                          
 	   //получить изображение и вырезать по координатам и размер
 	  g.drawImage(animations[playerAction][aniIndex],(int)xDelta,(int)yDelta, 256, 160, null);
 	
 	  
 	   }
-
-	  
-     
+ 
 }
