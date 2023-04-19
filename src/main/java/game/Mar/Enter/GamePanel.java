@@ -26,7 +26,8 @@ public class GamePanel extends JPanel{
 	private boolean moving = false;
 
 	//связываеп панель с клавай и мышкой 
-   public GamePanel() { 
+	//и  запускаем первыми методы 
+    public GamePanel() { 
 	   
 	   //здесь мы создаем экземпляр класса со своими данными точька где мышка 
 	   mouseInputs = new MouseInputs(this);  
@@ -53,8 +54,8 @@ public class GamePanel extends JPanel{
 		animations[j][i] = img.getSubimage(i * 64,j * 40, 64, 40);
 	
 }
-
-private void importImg() {
+ //получить картинку 
+ private void importImg() {
    InputStream is = getClass().getResourceAsStream("/player_sprites.png");
 	
    try {
@@ -63,21 +64,21 @@ private void importImg() {
 	   e.printStackTrace();
    }
 }
-
-private void setPanelSize() {
+ //размер панэли 
+  private void setPanelSize() {
 	   Dimension size = new Dimension(1200,600);
 	   setMinimumSize(size);
 	   setPreferredSize(size);
 	   setMaximumSize(size);
 	   
    }
-   
- public void setDirection(int direction) {
+   // направление 
+  public void setDirection(int direction) {
 	 this.playerDir = direction;
 	 moving = true;
 	 
  }
- 
+   //движение 
  public void setMoving(boolean moving) {
 	 this.moving = moving;
  }
@@ -119,6 +120,15 @@ private void setPanelSize() {
 	    	}
 	    }
    }
+   
+   public void updateGame() {
+	   
+	   updateAnimationTick();
+	   setAnimation();
+	   updatePos();
+	   
+   }
+   
    
    public void paintComponent(Graphics g) {
 	   super.paintComponent(g);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
