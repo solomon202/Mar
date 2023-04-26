@@ -30,7 +30,7 @@ public class Keyboardsinput  implements KeyListener {
 			  case KeyEvent.VK_A:
 			  case KeyEvent.VK_S:
 			  case KeyEvent.VK_D:
-				  gamePanel.setMoving(false);
+	//			  gamePanel.setMoving(false);
 				  break;
 				  
 			  }
@@ -41,16 +41,16 @@ public class Keyboardsinput  implements KeyListener {
 	  switch (e.getKeyCode()) {
 	  case KeyEvent.VK_W:
 		  //ПОЛУЧИЛИ доступ к игровой панели  СЫЛКИ НА ИГРАВУЮ ПАНЕЛЬ И ВСТАВИЛИ параметры
-		  gamePanel.setDirection(UP);
+//		  gamePanel.setDirection(UP);
 		  break;
 	  case KeyEvent.VK_A:
-		  gamePanel.setDirection(LIFT);
+//		  gamePanel.setDirection(LIFT);
 		  break;
 	  case KeyEvent.VK_S:
-		  gamePanel.setDirection(DOWN);
+//		  gamePanel.setDirection(DOWN);
 		  break;
 	  case KeyEvent.VK_D:
-		  gamePanel.setDirection(RIGHT);
+	//	  gamePanel.setDirection(RIGHT);
 		  break;
 		  
 	  }
