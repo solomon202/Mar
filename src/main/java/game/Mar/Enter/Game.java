@@ -1,4 +1,7 @@
 package game.Mar.Enter;
+
+import entities.Player;
+
 //класс где компануются все остальные компоненты 
 public class Game implements Runnable {
 	//сылочные 
@@ -8,6 +11,8 @@ public class Game implements Runnable {
 	private final int FPS_SET = 120;
 	private final int USP_SET = 200;
 	
+	private Player player;
+	
 	public Game() {
 		gamePanel = new GamePanel();
 		gameWindow = new GameWindow(gamePanel);
@@ -15,7 +20,12 @@ public class Game implements Runnable {
 		//Компонент является объектом, имеющим графическое изображение, которое может быть выведено на экран на экране, и это может взаимодействовать с пользователем. Примерами компонентов являются кнопки, флажки, и полосы прокрутки типичного графического интерфейса пользователя.
 		gamePanel.requestFocus();
 		startGameLoop();
+		initClasses();
 }
+	private void initClasses() {
+		// TODO Auto-generated method stub
+		
+	}
 	private void startGameLoop() {
 		gameThread = new Thread(this);
 		gameThread.start();
@@ -63,12 +73,6 @@ public class Game implements Runnable {
 				frames++;
 				deltaF--;
 			}
-			
-	//		if(now - lastFrame >= timePerFrame) {
-		//		gamePanel.repaint();
-			//	lastFrame = now;
-			//	frames++;
-		//	}
 			
 			if(System.currentTimeMillis()-lastCheck>=1000) {
 				lastCheck= System.currentTimeMillis();
